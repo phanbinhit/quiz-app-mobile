@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/tv_tilte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BKQUIZ"
+            android:textSize="60sp"
+            android:textColor="@color/colorLogo"
+            android:fontFamily="@font/summer"
+            >
+        </TextView>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_person_24">
+            </ImageView>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/edt_id"
+                android:hint="Enter id"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:textSize="18dp"
+                android:backgroundTint="@color/colorLineEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_baseline_lock_24"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ImageView>
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorLineEditText"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:hint="Enter password"
+                android:inputType="textPassword"
+                android:textSize="18dp">
+
+            </EditText>
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/btn_login"
+            android:background="@drawable/bg_button_exam"
+            android:text="Login"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/abeezee"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textColor="#fff">
+
+        </Button>
+    </LinearLayout>
+</RelativeLayout>

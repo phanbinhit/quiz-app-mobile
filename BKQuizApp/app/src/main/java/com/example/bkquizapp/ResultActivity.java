@@ -14,66 +14,91 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private TextView tvResult;
-    private TextView tvUserName;
-    private Button btnRestart;
-    private Socket mSocket;
-    private static final String URI_SERVER = "http://192.168.1.6:5000/";
+    private TextView tvId, tvName, tvClass, tvExam, tvScore;
+    private Button btnViewResult;
+    private Button btnStartAgain;
+    private Socket socket;
+    private Student student;
+    private Exam exam;
+    private String score;
+    private String numberQuestion;
+    private String numberRight;
+    private static final String URI_SERVER = new Address().getAddressV4();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
+        onBackPressed();
 
-        Intent intentResult = getIntent();
-        String score = intentResult.getStringExtra("score");
-        String userName = intentResult.getStringExtra("user");
-        String numberRight = intentResult.getStringExtra("numberRight");
-        String numberQuestion = intentResult.getStringExtra("numberQuestion");
-        String roomId = intentResult.getStringExtra("roomId");
-        JSONObject resultJsonObj = new JSONObject();
-        try {
-            resultJsonObj.put("roomId", roomId);
-            resultJsonObj.put("user", userName);
-            resultJsonObj.put("score", Float.parseFloat(score));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        tvId = (TextView) findViewById(R.id.tv_id_result);
+        tvName = (TextView) findViewById(R.id.tv_name_result);
+        tvClass = (TextView) findViewById(R.id.tv_class_result);
+        tvExam = (TextView) findViewById(R.id.tv_exam_result);
+        tvScore = (TextView) findViewById(R.id.tv_score_result);
+        btnViewResult = (Button) findViewById(R.id.btn_view_result);
+        btnStartAgain = (Button) findViewById(R.id.btn_again);
 
-        tvResult = (TextView) findViewById(R.id.tv_result);
-        tvUserName = (TextView) findViewById(R.id.tv_userResult);
-        btnRestart = (Button) findViewById(R.id.btn_restart);
+        Intent intentRs = getIntent();
+        student = (Student) intentRs.getSerializableExtra("student");
+        exam = (Exam) intentRs.getSerializableExtra("exam");
+        score = intentRs.getStringExtra("score");
+        numberQuestion = intentRs.getStringExtra("numberQuestion");
+        numberRight = intentRs.getStringExtra("numberRight");
 
         //connect to server
         try {
-            mSocket = IO.socket(URI_SERVER);
+            socket= IO.socket(URI_SERVER);
         } catch (URISyntaxException e) {
             Log.v("AvisActivity", "error connecting to socket");
             Toast.makeText(ResultActivity.this, "Server is not ready", Toast.LENGTH_SHORT).show();
         }
 
-        mSocket.connect();
+        socket.connect();
 
-        mSocket.emit("client-send-result", resultJsonObj);
+        JSONObject resultJSON = new JSONObject();
+        try {
+            resultJSON.put("idStudent", student.getId());
+            resultJSON.put("roomId", exam.getRoomId());
+            resultJSON.put("score", score);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        tvUserName.setText(userName);
-        tvResult.setText("Your score: " + score + " (" + numberRight + "/" + numberQuestion + ")");
-        btnRestart.setOnClickListener(new View.OnClickListener() {
+        socket.emit("client-send-result", resultJSON);
+
+        tvId.setText(student.getId());
+        tvName.setText(student.getName());
+        tvClass.setText(student.getClassName());
+        tvExam.setText(exam.getTitle());
+        tvScore.setText(score + " (" + numberRight +"/"+ numberQuestion + ")");
+
+        btnViewResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), RoomIdActivity.class));
-                mSocket.disconnect();
+                List<Question> questions = exam.getQuestions();
+                Intent intent = new Intent(v.getContext(), ViewAnswerActivity.class);
+                intent.putExtra("questions", (Serializable) questions);
+                startActivity(intent);
             }
         });
 
-        onBackPressed();
+        btnStartAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                socket.disconnect();
+                startActivity(new Intent(v.getContext(), LoginActivity.class));
+            }
+        });
     }
 
     @Override

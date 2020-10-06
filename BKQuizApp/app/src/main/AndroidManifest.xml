@@ -3,6 +3,7 @@
     package="com.example.bkquizapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -12,14 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RoomIdActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserActivity"></activity>
+        <activity android:name=".ViewAnswerActivity"></activity>
+        <activity android:name=".ExamActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ResultActivity"></activity>
     </application>

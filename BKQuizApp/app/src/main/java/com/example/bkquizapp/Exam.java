@@ -1,10 +1,12 @@
 package com.example.bkquizapp;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Exam {
+public class Exam implements Serializable {
 
     private String roomId;
+    private String title;
     private List<Question> questions;
     private long time;
 
@@ -12,8 +14,9 @@ public class Exam {
 
     }
 
-    public Exam(String roomId, List<Question> questions, long time) {
+    public Exam(String roomId, String title, List<Question> questions, long time) {
         this.roomId = roomId;
+        this.title = title;
         this.questions = questions;
         this.time = time;
     }
@@ -40,5 +43,13 @@ public class Exam {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

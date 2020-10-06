@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@color/colorBackground"
     tools:context=".MainActivity">
     <TextView
         android:id="@+id/tv_room"
@@ -15,8 +14,7 @@
         android:text="Room: 12345"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:fontFamily="@font/abeezee"
-        android:textColor="#fcff4a"
+        android:textColor="@color/colorText"
         >
     </TextView>
     <TextView
@@ -27,8 +25,7 @@
         android:text="User: 102170005"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:fontFamily="@font/abeezee"
-        android:textColor="#fcff4a"
+        android:textColor="@color/colorText"
         >
     </TextView>
     <TextView
@@ -44,88 +41,92 @@
         android:layout_marginTop="5dp"
         >
     </TextView>
-    <TextView
-        android:id="@+id/tv_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Cau 1/5:"
-        android:fontFamily="@font/abeezee"
-        android:textColor="#fff"
+    <LinearLayout
+        android:id="@+id/layout_question"
+        android:padding="4dp"
+        android:paddingLeft="8dp"
+        android:background="@drawable/radiobutton_bg"
         android:layout_below="@+id/tv_countdown"
-        android:layout_marginTop="5dp"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/tv_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22dp"
-        android:fontFamily="@font/abeezee"
-        android:textColor="#fff"
-        android:text="1+1=?"
-        android:layout_marginTop="2dp"
-        android:layout_below="@+id/tv_count"
-        >
-    </TextView>
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="Cau 1/5:"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="5dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/colorText"
+            android:text="1+ 2dsadsadsa"
+            android:layout_marginTop="2dp"
+            >
+        </TextView>
+    </LinearLayout>
     <RadioGroup
         android:id="@+id/rg_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:layout_centerVertical="true">
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/layout_question">
         <RadioButton
-            android:padding="12dp"
-            android:textSize="20dp"
+            android:padding="8dp"
+            android:textSize="18dp"
             android:id="@+id/rbtn_answer1"
             android:layout_width="match_parent"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/abeezee"
             android:checked="false"
-            android:textColor="#263238"
+            android:textColor="@color/colorText"
             android:background="@drawable/radiobutton_bg"
             android:layout_height="wrap_content">
         </RadioButton>
         <RadioButton
             android:id="@+id/rbtn_answer2"
-            android:padding="12dp"
-            android:textSize="20dp"
+            android:padding="8dp"
+            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_marginBottom="8dp"
             android:checked="false"
-            android:fontFamily="@font/abeezee"
             android:background="@drawable/radiobutton_bg"
-            android:textColor="#263238"
+            android:textColor="@color/colorText"
             android:layout_height="wrap_content">
         </RadioButton>
         <RadioButton
             android:id="@+id/rbtn_answer3"
             android:layout_width="match_parent"
-            android:padding="12dp"
+            android:padding="8dp"
             android:layout_marginBottom="8dp"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:background="@drawable/radiobutton_bg"
             android:checked="false"
-            android:fontFamily="@font/abeezee"
-            android:textColor="#263238"
+            android:textColor="@color/colorText"
             android:layout_height="wrap_content">
         </RadioButton>
         <RadioButton
             android:id="@+id/rbtn_answer4"
             android:layout_width="match_parent"
-            android:padding="12dp"
-            android:textSize="20dp"
+            android:padding="8dp"
+            android:textSize="18dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/radiobutton_bg"
             android:checked="false"
-            android:fontFamily="@font/abeezee"
             android:textColor="#263238"
             android:layout_height="wrap_content">
         </RadioButton>
     </RadioGroup>
     <RelativeLayout
         android:layout_below="@id/rg_question"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content">
@@ -138,7 +139,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:textColor="#263238"
-            android:background="@drawable/bg_edittext"
+            android:background="@drawable/bg_button_exam"
             android:textStyle="bold"
             android:textSize="16dp"
             >
@@ -152,7 +153,7 @@
             android:layout_below="@+id/btn_nextQuestion"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
-            android:layout_margin="8dp"
+            android:layout_margin="10dp"
             android:textColor="#fff"
             android:background="@drawable/bg_button"
             android:textStyle="bold"

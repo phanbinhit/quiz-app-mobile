@@ -20,8 +20,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.socket.client.IO;
@@ -39,19 +41,23 @@ public class MainActivity extends AppCompatActivity {
     private String roomId;
     private String userName;
     private List<Question> questions;
+    private CountDownTimer countDownTimer;
+    private Student student;
+    private Exam exam;
     private long time;
     private float score = 0;
-    private Socket socket;
-    private static final String URI_SERVER = "http://192.168.1.6:5000/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intentUser = getIntent();
-        roomId = intentUser.getStringExtra("roomId");
-        userName = intentUser.getStringExtra("userName");
-
+        student = (Student) getIntent().getSerializableExtra("student");
+        exam = (Exam) getIntent().getSerializableExtra("exam");
+        userName = student.getName();
+        roomId = exam.getTitle();
+        questions = exam.getQuestions();
+        Collections.shuffle(questions);
+        time = exam.getTime();
 
         tvRoom = (TextView) findViewById(R.id.tv_room);
         tvUser = (TextView) findViewById(R.id.tv_user);
@@ -67,105 +73,62 @@ public class MainActivity extends AppCompatActivity {
         tvCountDown = (TextView) findViewById(R.id.tv_countdown);
 
         //set text textview info
-        tvRoom.setText("Room: " + roomId);
-        tvUser.setText("User: "  + userName);
+        tvRoom.setText("Exam: " + roomId);
+        tvUser.setText("Student: "  + userName);
 
-        //connect to server
-        try {
-            socket= IO.socket(URI_SERVER);
-        } catch (URISyntaxException e) {
-            Log.v("AvisActivity", "error connecting to socket");
-            Toast.makeText(MainActivity.this, "Server is not ready", Toast.LENGTH_SHORT).show();
-        }
+        //set textview countdown
+        countDownTimer = new CountDownTimer(time * 1000, 1000) {
 
-        socket.connect();
-
-        //get exam from server
-        Emitter.Listener getExam = new Emitter.Listener() {
             @Override
-            public void call(Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        JSONObject examServerJsonObj = (JSONObject) args[0];
-                        try {
-                            JSONObject examJsonObj = examServerJsonObj.getJSONObject("exam");
-                            time = examJsonObj.getInt("time");
-                            JSONArray questionsJson = examJsonObj.getJSONArray("questions");
-                            questions = new ArrayList<>();
-                            for (int i = 0; i < questionsJson.length(); i++) {
-                                String questionStr = questionsJson.getJSONObject(i).getString("question");
-                                JSONArray answersJson = questionsJson.getJSONObject(i).getJSONArray("answers");
-                                String rightAnswer = questionsJson.getJSONObject(i).getString("rightAnswer");
-                                List<String> answers = new ArrayList<>();
-                                for (int j = 0; j < answersJson.length(); j++) {
-                                    answers.add(answersJson.getString(j));
-                                }
-                                Question question = new Question(questionStr, answers, rightAnswer);
-                                questions.add(question);
-                            }
-                            //set textview countdown
-                            new CountDownTimer(time * 1000, 1000) {
-
-                                @Override
-                                public void onTick(long millisUntilFinished) {
-                                    long minute = millisUntilFinished / 1000/ 60;
-                                    long second = millisUntilFinished / 1000 - minute * 60;
-                                    tvCountDown.setText(minute + ":" + second);
-                                }
-
-                                @Override
-                                public void onFinish() {
-                                    tvCountDown.setText("00:00");
-                                    intentResult();
-                                }
-                            }.start();
-
-                            //set textview question and answer;
-                            setTextQuestionAndAnswer();
-
-                            btnNextQuestion.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (radioGroup.getCheckedRadioButtonId() == -1) {
-                                        Toast.makeText(MainActivity.this, "Mark a answer", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        RadioButton choseAns = findViewById(radioGroup.getCheckedRadioButtonId());
-                                        String textChoseAns = choseAns.getText().toString();
-
-                                        if (textChoseAns.equals(questions.get(flag).getRightAnswer())) {
-                                            numberRight++;
-                                        }
-
-                                        flag++;
-
-                                        if (flag < questions.size()) {
-                                            setTextQuestionAndAnswer();
-                                        } else {
-                                            intentResult();
-                                        }
-                                    }
-
-                                    //clear checked radio button
-                                    radioGroup.clearCheck();
-                                }
-                            });
-
-                            btnFinish.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    intentResult();
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+            public void onTick(long millisUntilFinished) {
+                long minute = millisUntilFinished / 1000/ 60;
+                long second = millisUntilFinished / 1000 - minute * 60;
+                tvCountDown.setText(minute + ":" + second);
             }
-        };
-        socket.emit("client-request-exam", roomId);
-        socket.on("server-send-exam", getExam);
+
+            @Override
+            public void onFinish() {
+                tvCountDown.setText("00:00");
+                intentResult();
+            }
+        }.start();
+
+        //set textview question and answer;
+        setTextQuestionAndAnswer();
+
+        btnNextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(MainActivity.this, "Mark a answer", Toast.LENGTH_SHORT).show();
+                } else {
+                    RadioButton choseAns = findViewById(radioGroup.getCheckedRadioButtonId());
+                    String textChoseAns = choseAns.getText().toString();
+
+                    if (textChoseAns.equals(questions.get(flag).getRightAnswer())) {
+                        numberRight++;
+                    }
+
+                    flag++;
+
+                    if (flag < questions.size()) {
+                        setTextQuestionAndAnswer();
+                    } else {
+                        intentResult();
+                    }
+                }
+
+                //clear checked radio button
+                radioGroup.clearCheck();
+            }
+        });
+
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentResult();
+            }
+        });
 
         //override back press
         onBackPressed();
@@ -174,14 +137,14 @@ public class MainActivity extends AppCompatActivity {
     private void intentResult() {
         Toast.makeText(this, questions.size()+"", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("user", userName);
+        countDownTimer.cancel();
         intent.putExtra("numberQuestion", questions.size() + "");
         intent.putExtra("numberRight", numberRight + "");
         score = 10 * ((float) numberRight / (float) questions.size());
         intent.putExtra("score", score + "");
-        intent.putExtra("roomId", roomId);
+        intent.putExtra("student", student);
+        intent.putExtra("exam", exam);
         startActivity(intent);
-        socket.disconnect();
     }
 
     private void setTextQuestionAndAnswer() {
