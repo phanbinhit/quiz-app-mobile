@@ -29,8 +29,8 @@
             android:layout_alignParentRight="true"
             android:text="start"
             android:fontFamily="@font/abeezee"
-            android:textSize="18dp"
-            android:textColor="@color/colorText">
+            android:textSize="16dp"
+            android:textColor="#fff">
         </Button>
     </RelativeLayout>
 </LinearLayout>

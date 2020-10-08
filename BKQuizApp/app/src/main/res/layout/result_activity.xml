@@ -138,6 +138,7 @@
                 android:background="@drawable/bg_button_exam"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:textColor="@color/colorText"
                 android:text="View">
             </Button>
         </LinearLayout>

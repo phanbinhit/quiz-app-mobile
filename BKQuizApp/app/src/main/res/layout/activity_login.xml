@@ -3,19 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/layout_login"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_item_listview"
+            android:layout_centerHorizontal="true"
+            android:layout_width="170dp"
+            android:layout_height="170dp">
+        </ImageView>
         <TextView
             android:layout_gravity="center"
             android:id="@+id/tv_tilte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BKQUIZ"
-            android:textSize="60sp"
-            android:textColor="@color/colorLogo"
             android:fontFamily="@font/summer"
+            android:textSize="50dp"
+            android:textColor="#010203"
             >
         </TextView>
         <LinearLayout
@@ -58,6 +68,7 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorLineEditText"
                 android:gravity="left"
+                android:layout_gravity="center"
                 android:paddingLeft="5dp"
                 android:hint="Enter password"
                 android:inputType="textPassword"
@@ -70,7 +81,7 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:id="@+id/btn_login"
-            android:background="@drawable/bg_button_exam"
+            android:background="@drawable/bg_button"
             android:text="Login"
             android:textSize="24dp"
             android:textStyle="bold"
@@ -78,7 +89,6 @@
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:textColor="#fff">
-
         </Button>
     </LinearLayout>
 </RelativeLayout>
