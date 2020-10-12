@@ -29,8 +29,7 @@ import io.socket.emitter.Emitter;
 public class LoginActivity extends AppCompatActivity{
     private EditText edtId, edtPassword;
     private Button btnLogin;
-    private Socket socket;
-    private static final String URI_SERVER = new Address().getAddressV4();
+    private Connect connect;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +38,9 @@ public class LoginActivity extends AppCompatActivity{
         edtId = (EditText) findViewById(R.id.edt_id);
         edtPassword = (EditText) findViewById(R.id.edt_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
+
+        connect = new Connect();
+        connect.connectServer();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,16 +57,7 @@ public class LoginActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
 
-                    //connect to server
-                    try {
-                        socket= IO.socket(URI_SERVER);
-                    } catch (URISyntaxException e) {
-                        Log.v("AvisActivity", "error connecting to socket");
-                        Toast.makeText(LoginActivity.this, "Server is not ready", Toast.LENGTH_SHORT).show();
-                    }
-
-                    socket.connect();
-                    socket.emit("client-send-login", loginObj);
+                    connect.socket.emit("client-send-login", loginObj);
                     Emitter.Listener loginEmit = new Emitter.Listener() {
                         @Override
                         public void call(Object... args) {
@@ -96,7 +89,6 @@ public class LoginActivity extends AppCompatActivity{
                                                 Intent intent = new Intent(getApplicationContext(), ExamActivity.class);
                                                 intent.putExtra("studentIntent", (Serializable) student);
                                                 startActivity(intent);
-                                                socket.disconnect();
                                             }
                                         }
                                     } catch (JSONException e) {
@@ -106,7 +98,7 @@ public class LoginActivity extends AppCompatActivity{
                             });
                         }
                     };
-                    socket.on("server-send-login", loginEmit);
+                    connect.socket.on("server-send-login", loginEmit);
                 }
             }
         });

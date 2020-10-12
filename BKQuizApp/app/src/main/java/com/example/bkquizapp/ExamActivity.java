@@ -29,9 +29,8 @@ public class ExamActivity extends AppCompatActivity {
     private TextView tvId, tvName;
     private ListView lvExams;
     private CustomAdapter adapter;
-    private Socket socket;
     private List<Exam> exams = new ArrayList<>();
-    private static final String URI_SERVER = new Address().getAddressV4();
+    private Connect connect;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,26 +44,18 @@ public class ExamActivity extends AppCompatActivity {
         tvId.setText(student.getId());
         tvName.setText(student.getName());
 
+        connect = new Connect();
+
         List<String> ids = student.getExamIds().stream()
                 .filter(exam -> exam.isCompleted() == false)
                 .map(exam -> exam.getRoomId())
                 .collect(Collectors.toList());
-
-        //connect to server
-        try {
-            socket= IO.socket(URI_SERVER);
-        } catch (URISyntaxException e) {
-            Log.v("AvisActivity", "error connecting to socket");
-            Toast.makeText(ExamActivity.this, "Server is not ready", Toast.LENGTH_SHORT).show();
-        }
-
-        socket.connect();
         JSONArray idJSONArray = new JSONArray();
         ids.forEach(id -> {
             idJSONArray.put(id);
         });
 
-            socket.emit("id-not-complete", idJSONArray);
+        connect.socket.emit("id-not-complete", idJSONArray);
             Emitter.Listener examEmitter = new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
@@ -98,7 +89,6 @@ public class ExamActivity extends AppCompatActivity {
                                 }
                                 adapter = new CustomAdapter(ExamActivity.this, R.layout.activity_row, (ArrayList<Exam>) exams, student);
                                 lvExams.setAdapter(adapter);
-                                socket.disconnect();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -106,6 +96,6 @@ public class ExamActivity extends AppCompatActivity {
                     });
                 }
             };
-            socket.on("exam-not-complete", examEmitter);
+        connect.socket.on("exam-not-complete", examEmitter);
     }
 }

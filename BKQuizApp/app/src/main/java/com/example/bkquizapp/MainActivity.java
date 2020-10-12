@@ -1,8 +1,10 @@
 package com.example.bkquizapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private Exam exam;
     private long time;
     private float score = 0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         userName = student.getName();
         roomId = exam.getTitle();
         questions = exam.getQuestions();
+        questions.forEach(question -> {
+            Collections.shuffle(question.getAnswers());
+        });
         Collections.shuffle(questions);
         time = exam.getTime();
 

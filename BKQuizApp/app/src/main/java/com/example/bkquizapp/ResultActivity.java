@@ -26,13 +26,14 @@ public class ResultActivity extends AppCompatActivity {
     private TextView tvId, tvName, tvClass, tvExam, tvScore;
     private Button btnViewResult;
     private Button btnStartAgain;
-    private Socket socket;
+    //private Socket socket;
     private Student student;
     private Exam exam;
     private String score;
     private String numberQuestion;
     private String numberRight;
-    private static final String URI_SERVER = new Address().getAddressV4();
+    //private static final String URI_SERVER = new Address().getAddressV4();
+    private Connect connect;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,16 +55,7 @@ public class ResultActivity extends AppCompatActivity {
         score = intentRs.getStringExtra("score");
         numberQuestion = intentRs.getStringExtra("numberQuestion");
         numberRight = intentRs.getStringExtra("numberRight");
-
-        //connect to server
-        try {
-            socket= IO.socket(URI_SERVER);
-        } catch (URISyntaxException e) {
-            Log.v("AvisActivity", "error connecting to socket");
-            Toast.makeText(ResultActivity.this, "Server is not ready", Toast.LENGTH_SHORT).show();
-        }
-
-        socket.connect();
+        connect = new Connect();
 
         JSONObject resultJSON = new JSONObject();
         try {
@@ -74,7 +66,7 @@ public class ResultActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        socket.emit("client-send-result", resultJSON);
+        connect.socket.emit("client-send-result", resultJSON);
 
         tvId.setText(student.getId());
         tvName.setText(student.getName());
@@ -95,7 +87,7 @@ public class ResultActivity extends AppCompatActivity {
         btnStartAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                socket.disconnect();
+                connect.socket.disconnect();
                 startActivity(new Intent(v.getContext(), LoginActivity.class));
             }
         });
