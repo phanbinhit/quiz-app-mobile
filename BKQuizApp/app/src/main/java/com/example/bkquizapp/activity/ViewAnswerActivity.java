@@ -1,10 +1,14 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.activity;
 
 import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.bkquizapp.R;
+import com.example.bkquizapp.adapter.CustomAdaperAnswer;
+import com.example.bkquizapp.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;

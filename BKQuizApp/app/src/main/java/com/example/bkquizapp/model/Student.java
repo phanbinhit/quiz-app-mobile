@@ -1,10 +1,9 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.model;
+
+import com.example.bkquizapp.model.ExamResult;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Student implements Serializable {
     private String id;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_history_exam"
+            android:text="Midle test Math"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/colorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:id="@+id/tv_history_time"
+            android:text="Hoàn thành: 14-11-2020:19h30"
+            android:textSize="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_history_exam"
+            android:textColor="@color/colorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:id="@+id/tv_history_score"
+            android:text="Điểm: 10"
+            android:textSize="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_history_time"
+            android:textColor="@color/colorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </RelativeLayout>
+</LinearLayout>

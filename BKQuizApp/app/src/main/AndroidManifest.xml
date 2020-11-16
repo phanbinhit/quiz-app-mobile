@@ -13,17 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewAnswerActivity"></activity>
-        <activity android:name=".ExamActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".activity.ViewAnswerActivity"></activity>
+        <activity android:name=".activity.ExamActivity"></activity>
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.ResultActivity"></activity>
+        <activity android:name=".activity.AdminActivity"></activity>
     </application>
-
 </manifest>

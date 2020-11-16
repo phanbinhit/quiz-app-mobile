@@ -1,40 +1,44 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.bkquizapp.R;
+import com.example.bkquizapp.model.Exam;
+import com.example.bkquizapp.model.Question;
+import com.example.bkquizapp.model.Student;
+import com.example.bkquizapp.utils.Connect;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import io.socket.client.IO;
-import io.socket.client.Socket;
 
 public class ResultActivity extends AppCompatActivity {
 
     private TextView tvId, tvName, tvClass, tvExam, tvScore;
     private Button btnViewResult;
     private Button btnStartAgain;
-    //private Socket socket;
     private Student student;
     private Exam exam;
     private String score;
     private String numberQuestion;
     private String numberRight;
-    //private static final String URI_SERVER = new Address().getAddressV4();
     private Connect connect;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,12 @@ public class ResultActivity extends AppCompatActivity {
         score = intentRs.getStringExtra("score");
         numberQuestion = intentRs.getStringExtra("numberQuestion");
         numberRight = intentRs.getStringExtra("numberRight");
+
+        //get curent date and time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("dd-MM-yyyy HH:mm:ss"));
+        LocalDateTime current = LocalDateTime.now();
+        String timeCompleted = formatter.format(current);
+
         connect = new Connect();
 
         JSONObject resultJSON = new JSONObject();
@@ -62,10 +72,10 @@ public class ResultActivity extends AppCompatActivity {
             resultJSON.put("idStudent", student.getId());
             resultJSON.put("roomId", exam.getRoomId());
             resultJSON.put("score", score);
+            resultJSON.put("time", timeCompleted);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         connect.socket.emit("client-send-result", resultJSON);
 
         tvId.setText(student.getId());
@@ -87,14 +97,13 @@ public class ResultActivity extends AppCompatActivity {
         btnStartAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connect.socket.disconnect();
-                startActivity(new Intent(v.getContext(), LoginActivity.class));
+                startActivity(new Intent(v.getContext(), ExamActivity.class));
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "You have completed the test", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Bạn đã hoàn thành bài thi", Toast.LENGTH_SHORT).show();
     }
 }

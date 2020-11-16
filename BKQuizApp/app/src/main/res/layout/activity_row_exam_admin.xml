@@ -12,24 +12,13 @@
         <TextView
             android:id="@+id/tv_exam"
             android:text="Midle test Math"
-            android:textSize="18dp"
+            android:textSize="20dp"
+            android:paddingVertical="10dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:textColor="@color/colorText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </TextView>
-
-        <Button
-            android:id="@+id/btn_start_exam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#010203"
-            android:textColor="#fff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:text="THI"
-            android:textSize="14dp">
-        </Button>
     </RelativeLayout>
 </LinearLayout>

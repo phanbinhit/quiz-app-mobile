@@ -1,4 +1,4 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.example.bkquizapp.model.Exam;
+import com.example.bkquizapp.activity.MainActivity;
+import com.example.bkquizapp.R;
+import com.example.bkquizapp.model.Student;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,30 +7,20 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.bkquizapp.R;
+import com.example.bkquizapp.model.Exam;
+import com.example.bkquizapp.model.Question;
+import com.example.bkquizapp.model.Student;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import io.socket.client.IO;
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (radioGroup.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(MainActivity.this, "Mark a answer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Chọn 1 đáp án", Toast.LENGTH_SHORT).show();
                 } else {
                     RadioButton choseAns = findViewById(radioGroup.getCheckedRadioButtonId());
                     String textChoseAns = choseAns.getText().toString();
@@ -141,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void intentResult() {
-        Toast.makeText(this, questions.size()+"", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ResultActivity.class);
         countDownTimer.cancel();
         intent.putExtra("numberQuestion", questions.size() + "");

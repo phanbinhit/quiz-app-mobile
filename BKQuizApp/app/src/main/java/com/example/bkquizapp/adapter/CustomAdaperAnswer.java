@@ -1,18 +1,18 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.Serializable;
+import com.example.bkquizapp.model.Question;
+import com.example.bkquizapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

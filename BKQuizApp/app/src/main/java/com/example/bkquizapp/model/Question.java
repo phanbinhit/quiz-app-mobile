@@ -1,4 +1,4 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.model;
 
 import java.io.Serializable;
 import java.util.List;

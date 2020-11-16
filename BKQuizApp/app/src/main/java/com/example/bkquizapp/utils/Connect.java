@@ -1,4 +1,4 @@
-package com.example.bkquizapp;
+package com.example.bkquizapp.utils;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -10,8 +10,8 @@ import io.socket.client.Socket;
 
 public class Connect {
     public static Socket socket;
-    private static final String URI_SERVER = "http://192.168.1.26:5000/";
-    public void connectServer() {
+    private static final String URI_SERVER = "http://192.168.1.5:5000/";
+    public static void connectServer() {
         //connect to server
         try {
             socket= IO.socket(URI_SERVER);

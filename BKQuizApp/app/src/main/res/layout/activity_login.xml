@@ -41,7 +41,7 @@
             <EditText
                 android:layout_marginTop="5dp"
                 android:id="@+id/edt_id"
-                android:hint="Enter id"
+                android:hint="Nhập MSSV"
                 android:gravity="left"
                 android:paddingLeft="5dp"
                 android:textSize="18dp"
@@ -70,7 +70,7 @@
                 android:gravity="left"
                 android:layout_gravity="center"
                 android:paddingLeft="5dp"
-                android:hint="Enter password"
+                android:hint="Nhập mật khẩu"
                 android:inputType="textPassword"
                 android:textSize="18dp">
 
@@ -78,17 +78,16 @@
         </LinearLayout>
 
         <Button
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
             android:id="@+id/btn_login"
-            android:background="@drawable/bg_button"
-            android:text="Login"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/abeezee"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/ic_baseline_arrow_forward_24"
+            android:text="Đăng nhập"
+            android:textSize="16dp"
+            android:background="#010203"
+            android:textColor="#fff"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="#fff">
+            android:layout_height="wrap_content">
         </Button>
     </LinearLayout>
 </RelativeLayout>

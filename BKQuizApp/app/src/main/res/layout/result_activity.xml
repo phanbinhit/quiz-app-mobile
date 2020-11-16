@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_above="@+id/layout_rs"
-        android:text="RESULT"
+        android:text="Kết quả"
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Id:"
+                android:text="MSSV:"
                 android:textSize="20dp"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="5dp">
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name:"
+                android:text="Tên:"
                 android:textSize="20dp"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="5dp">
@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Class:"
+                android:text="Lớp:"
                 android:textSize="20dp"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="5dp">
@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Exam:"
+                android:text="Bài thi:"
                 android:textSize="20dp"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="5dp">
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Score:"
+                android:text="Điểm:"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:textColor="@color/colorText"
@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Result:"
+                android:text="Đáp án:"
                 android:textSize="20dp"
                 android:textColor="@color/colorText"
                 android:layout_marginBottom="5dp">
@@ -133,12 +133,11 @@
             </TextView>
             <Button
                 android:id="@+id/btn_view_result"
-                android:fontFamily="@font/abeezee"
-                android:textSize="18dp"
-                android:background="@drawable/bg_button_exam"
+                android:textSize="16dp"
+                android:background="#010203"
+                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:textColor="@color/colorText"
                 android:text="View">
             </Button>
         </LinearLayout>
@@ -148,9 +147,10 @@
         android:layout_below="@+id/layout_rs"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="Start a new exam"
-        android:textSize="18dp"
-        android:background="@drawable/bg_button_exam"
+        android:text="quay lại"
+        android:textSize="16dp"
+        android:background="#010203"
+        android:textColor="#fff"
         android:layout_width="200dp"
         android:layout_height="wrap_content">
     </Button>
