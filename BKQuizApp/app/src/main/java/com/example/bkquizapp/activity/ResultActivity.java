@@ -76,7 +76,7 @@ public class ResultActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        connect.socket.emit("client-send-result", resultJSON);
+        //connect.socket.emit("client-send-result", resultJSON);
 
         tvId.setText(student.getId());
         tvName.setText(student.getName());

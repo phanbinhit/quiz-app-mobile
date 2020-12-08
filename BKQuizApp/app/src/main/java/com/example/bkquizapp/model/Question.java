@@ -2,35 +2,36 @@ package com.example.bkquizapp.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class Question implements Serializable {
-    private String question;
-    private List<String> answers;
+    private Ask question;
+    private Map<Integer, String> answers;
     private String rightAnswer;
 
     public Question() {
 
     }
 
-    public Question(String question, List<String> answers, String rightAnswer) {
+    public Question(Ask question, Map<Integer, String> answers, String rightAnswer) {
         this.question = question;
         this.answers = answers;
         this.rightAnswer = rightAnswer;
     }
 
-    public String getQuestion() {
+    public Ask getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    public void setQuestion(Ask question) {
         this.question = question;
     }
 
-    public List<String> getAnswers() {
+    public Map<Integer, String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<String> answers) {
+    public void setAnswers(Map<Integer, String> answers) {
         this.answers = answers;
     }
 

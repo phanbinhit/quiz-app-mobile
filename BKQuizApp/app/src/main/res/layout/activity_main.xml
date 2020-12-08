@@ -1,158 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".activity.MainActivity">
-    <TextView
-        android:id="@+id/tv_room"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Room: 12345"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorText"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/tv_user"
-        android:layout_below="@+id/tv_room"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User: 102170005"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorText"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/tv_countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:textSize="24dp"
-        android:fontFamily="@font/digital"
-        android:background="@drawable/bg_countdown"
-        android:textColor="#fff"
-        android:layout_below="@+id/tv_user"
-        android:layout_marginTop="5dp"
-        >
-    </TextView>
-    <LinearLayout
-        android:id="@+id/layout_question"
-        android:padding="8dp"
-        android:background="@drawable/radiobutton_bg"
-        android:layout_below="@+id/tv_countdown"
+    android:background="#fff">
+    <RelativeLayout
+        android:id="@+id/layout_header"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/tv_count"
+            android:id="@+id/tv_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="Cau 1/5:"
-            android:textColor="@color/colorText"
+            android:padding="12dp"
+            android:textSize="24dp"
+            android:fontFamily="@font/digital"
+            android:background="@drawable/bg_countdown"
+            android:textColor="#fff"
             android:layout_marginTop="5dp"
             >
         </TextView>
-        <TextView
-            android:id="@+id/tv_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textColor="@color/colorText"
-            android:text="1+ 2dsadsadsa"
-            android:layout_marginTop="2dp"
-            >
-        </TextView>
-    </LinearLayout>
-    <RadioGroup
-        android:id="@+id/rg_question"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/layout_question">
-        <RadioButton
-            android:padding="10dp"
-            android:textSize="18dp"
-            android:id="@+id/rbtn_answer1"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
-            android:checked="false"
-            android:textColor="@color/colorText"
-            android:background="@drawable/radiobutton_bg"
-            android:layout_height="wrap_content">
-        </RadioButton>
-        <RadioButton
-            android:id="@+id/rbtn_answer2"
-            android:padding="10dp"
-            android:textSize="18dp"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
-            android:checked="false"
-            android:background="@drawable/radiobutton_bg"
-            android:textColor="@color/colorText"
-            android:layout_height="wrap_content">
-        </RadioButton>
-        <RadioButton
-            android:id="@+id/rbtn_answer3"
-            android:layout_width="match_parent"
-            android:padding="10dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="18dp"
-            android:background="@drawable/radiobutton_bg"
-            android:checked="false"
-            android:textColor="@color/colorText"
-            android:layout_height="wrap_content">
-        </RadioButton>
-        <RadioButton
-            android:id="@+id/rbtn_answer4"
-            android:layout_width="match_parent"
-            android:padding="10dp"
-            android:textSize="18dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/radiobutton_bg"
-            android:checked="false"
-            android:textColor="@color/colorText"
-            android:layout_height="wrap_content">
-        </RadioButton>
-    </RadioGroup>
-    <RelativeLayout
-        android:layout_below="@id/rg_question"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_nextQuestion"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Next Question"
-            android:fontFamily="@font/abeezee"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:textColor="#fff"
-            android:background="@drawable/bg_button_exam"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            >
-        </Button>
         <Button
             android:id="@+id/btn_finish"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="finish"
             android:fontFamily="@font/abeezee"
-            android:layout_below="@+id/btn_nextQuestion"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
             android:textColor="#fff"
             android:background="@drawable/bg_button"
             android:textStyle="bold"
@@ -160,4 +40,13 @@
             >
         </Button>
     </RelativeLayout>
-</RelativeLayout>
+    <view class="androidx.appcompat.app.AlertController$RecycleListView"
+        android:scrollbars="none"
+        android:id="@+id/lv_question"
+        android:layout_marginTop="16px"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </view>
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.bkquizapp.utils;
 
+import com.example.bkquizapp.common.Type;
+import com.example.bkquizapp.model.Ask;
 import com.example.bkquizapp.model.Exam;
 import com.example.bkquizapp.model.ExamResult;
 import com.example.bkquizapp.model.Question;
@@ -9,7 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExamUtil {
     private ExamUtil() {
@@ -18,6 +22,7 @@ public class ExamUtil {
 
     public static List<Exam> changeExamJsonArrayToListExam(JSONArray examEmitJSONArray) throws JSONException {
         List<Exam> exams = new ArrayList<>();
+        Question question = null;
         for (int i = 0; i < examEmitJSONArray.length(); i++) {
             JSONObject examJSON = examEmitJSONArray.getJSONObject(i);
             String title = examJSON.getString("title");
@@ -26,20 +31,42 @@ public class ExamUtil {
             JSONArray questionsJson = examJSON.getJSONArray("questions");
             List<Question> questions = new ArrayList<>();
             for (int k = 0; k < questionsJson.length(); k++) {
-                String questionStr = questionsJson.getJSONObject(k).getString("question");
+                JSONObject askJson = questionsJson.getJSONObject(k).getJSONObject("ask");
+                String titleQuestion = askJson.getString("title");
+                Type type = getType(askJson.getInt("type"));
+                Ask ask = new Ask(titleQuestion, type);
                 JSONArray answersJson = questionsJson.getJSONObject(k).getJSONArray("answers");
-                String rightAnswer = questionsJson.getJSONObject(k).getString("rightAnswer");
-                List<String> answers = new ArrayList<>();
+                Map<Integer, String> answers = new LinkedHashMap<>();
                 for (int j = 0; j < answersJson.length(); j++) {
-                    answers.add(answersJson.getString(j));
+                    answers.put(j, answersJson.getString(j));
                 }
-                Question question = new Question(questionStr, answers, rightAnswer);
+                String rightAnswer = questionsJson.getJSONObject(k).getString("rightAnswer");
+                question = new Question(ask, answers, rightAnswer);
                 questions.add(question);
             }
             Exam exam = new Exam(roomId, title, questions, time);
             exams.add(exam);
         }
         return exams;
+    }
+
+    public static Type getType(int i) {
+        Type type = null;
+        switch (i) {
+            case 0:
+                type = Type.NORMAL;
+                break;
+            case 1:
+                type = Type.CHECKBOX;
+                break;
+            case 2:
+                type = Type.TRUEFALSE;
+                break;
+            case 3:
+                type = Type.IMAGE;
+                break;
+        }
+        return type;
     }
 
     public static List<ExamResult> changeExamResultJsonArrayToListExamResult(JSONArray examResultJsonArray) throws JSONException {

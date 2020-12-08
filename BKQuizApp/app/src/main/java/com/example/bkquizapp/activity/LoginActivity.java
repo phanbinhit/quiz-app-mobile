@@ -43,13 +43,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        connect = new Connect();
+        connect.connectServer();
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        id = sessionManagement.getSession();
+        if (!id.equals("-1")) {
+            moveExamActivity();
+        }
         edtId = (EditText) findViewById(R.id.edt_id);
         edtPassword = (EditText) findViewById(R.id.edt_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-
-        connect = new Connect();
-        connect.connectServer();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +108,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //check if student is logged in
-        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
-        id = sessionManagement.getSession();
-        if (!id.equals("-1")) {
-            moveExamActivity();
-        }
     }
 
     private void moveExamActivity() {

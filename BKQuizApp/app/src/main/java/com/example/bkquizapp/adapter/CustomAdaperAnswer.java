@@ -42,7 +42,7 @@ public class CustomAdaperAnswer extends ArrayAdapter {
             viewHolder = (ViewHolderAnswer) convertView.getTag();
         }
         Question question = questions.get(position);
-        viewHolder.tvQuestionRs.setText(question.getQuestion());
+        viewHolder.tvQuestionRs.setText(question.getQuestion().getTitle());
         viewHolder.tvAnswerRs.setText(question.getRightAnswer());
         return convertView;
     }
