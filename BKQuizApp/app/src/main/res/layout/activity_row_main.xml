@@ -6,7 +6,7 @@
     android:padding="12dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_question_main"
         android:text="1. Ai là người đẹp trai nhất?"
@@ -15,41 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
-    <RadioGroup
-        android:id="@+id/rg_answer"
+    <LinearLayout
+        android:id="@+id/layout_inner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/rb1"
-            android:textSize="16dp"
-            android:text="Đáp án 1"
-            android:checked="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </RadioButton>
-        <RadioButton
-            android:id="@+id/rb2"
-            android:textSize="16dp"
-            android:text="Đáp án 1"
-            android:checked="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </RadioButton>
-        <RadioButton
-            android:id="@+id/rb3"
-            android:textSize="16dp"
-            android:text="Đáp án 1"
-            android:checked="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </RadioButton>
-        <RadioButton
-            android:id="@+id/rb4"
-            android:textSize="16dp"
-            android:text="Đáp án 1"
-            android:checked="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </RadioButton>
-    </RadioGroup>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
 </LinearLayout>

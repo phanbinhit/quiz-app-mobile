@@ -34,7 +34,13 @@ public class ExamUtil {
                 JSONObject askJson = questionsJson.getJSONObject(k).getJSONObject("ask");
                 String titleQuestion = askJson.getString("title");
                 Type type = getType(askJson.getInt("type"));
-                Ask ask = new Ask(titleQuestion, type);
+                Ask ask;
+                if (type.equals(Type.IMAGE)) {
+                    String path = askJson.getString("path");
+                    ask = new Ask(title, type, path);
+                } else {
+                    ask = new Ask(titleQuestion, type);
+                }
                 JSONArray answersJson = questionsJson.getJSONObject(k).getJSONArray("answers");
                 Map<Integer, String> answers = new LinkedHashMap<>();
                 for (int j = 0; j < answersJson.length(); j++) {
@@ -60,9 +66,6 @@ public class ExamUtil {
                 type = Type.CHECKBOX;
                 break;
             case 2:
-                type = Type.TRUEFALSE;
-                break;
-            case 3:
                 type = Type.IMAGE;
                 break;
         }
