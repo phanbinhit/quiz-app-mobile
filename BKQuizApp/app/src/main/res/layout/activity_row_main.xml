@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:orientation="vertical"
-    android:id="@+id/linear_row"
+    android:id="@+id/layout_inner"
     android:background="@drawable/row_listview"
     android:padding="12dp"
+    android:layout_marginBottom="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -12,13 +13,19 @@
         android:text="1. Ai là người đẹp trai nhất?"
         android:textColor="@color/colorText"
         android:textSize="18dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
     <LinearLayout
-        android:id="@+id/layout_inner"
+        android:id="@+id/layout_image"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
     </LinearLayout>
+    <RadioGroup
+        android:id="@+id/rg_quesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </RadioGroup>
 </LinearLayout>

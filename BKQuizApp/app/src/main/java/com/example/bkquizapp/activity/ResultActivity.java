@@ -3,6 +3,7 @@ package com.example.bkquizapp.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -37,6 +39,7 @@ public class ResultActivity extends AppCompatActivity {
     private String numberQuestion;
     private String numberRight;
     private Connect connect;
+    private Map<Integer, String> selectedMap;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -59,6 +62,7 @@ public class ResultActivity extends AppCompatActivity {
         score = intentRs.getStringExtra("score");
         numberQuestion = intentRs.getStringExtra("numberQuestion");
         numberRight = intentRs.getStringExtra("numberRight");
+        selectedMap = (Map<Integer, String>) intentRs.getSerializableExtra("selectedMap");
 
         //get curent date and time
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("dd-MM-yyyy HH:mm:ss"));
@@ -76,7 +80,7 @@ public class ResultActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //connect.socket.emit("client-send-result", resultJSON);
+        connect.socket.emit("client-send-result", resultJSON);
 
         tvId.setText(student.getId());
         tvName.setText(student.getName());
@@ -90,6 +94,7 @@ public class ResultActivity extends AppCompatActivity {
                 List<Question> questions = exam.getQuestions();
                 Intent intent = new Intent(v.getContext(), ViewAnswerActivity.class);
                 intent.putExtra("questions", (Serializable) questions);
+                intent.putExtra("selectedMap", (Serializable) selectedMap);
                 startActivity(intent);
             }
         });

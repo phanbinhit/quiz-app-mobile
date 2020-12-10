@@ -53,13 +53,4 @@
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-<!--    <ListView-->
-<!--        android:scrollbars="none"-->
-<!--        android:id="@+id/lv_question"-->
-<!--        android:layout_marginTop="16px"-->
-<!--        android:divider="@android:color/transparent"-->
-<!--        android:dividerHeight="10.0sp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--    </ListView>-->
 </LinearLayout>

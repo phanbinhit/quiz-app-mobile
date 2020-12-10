@@ -6,5 +6,6 @@
     <color name="colorBackground">#3fbed7</color>
     <color name="colorLineEditText">#bdbdbd</color>
     <color name="colorText">#010203</color>
-    <color name="colorLogo">#0094c6</color>
+    <color name="tintGreen">#4bf542</color>
+    <color name="tintRed">#d93425</color>
 </resources>

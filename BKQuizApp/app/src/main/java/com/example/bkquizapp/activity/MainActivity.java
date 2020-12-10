@@ -8,7 +8,6 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bkquizapp.R;
-import com.example.bkquizapp.adapter.CustomAdapterMain;
 import com.example.bkquizapp.adapter.QuestionAdapter;
-import com.example.bkquizapp.common.Type;
 import com.example.bkquizapp.model.Exam;
 import com.example.bkquizapp.model.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -127,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, ResultActivity.class);
         countDownTimer.cancel();
+        intent.putExtra("selectedMap", (Serializable) selectedMap);
         intent.putExtra("numberQuestion", exam.getQuestions().size() + "");
         intent.putExtra("numberRight", numberRight + "");
         float score = 10 * ((float) numberRight / (float) exam.getQuestions().size());

@@ -37,7 +37,7 @@ public class ExamUtil {
                 Ask ask;
                 if (type.equals(Type.IMAGE)) {
                     String path = askJson.getString("path");
-                    ask = new Ask(title, type, path);
+                    ask = new Ask(titleQuestion, type, path);
                 } else {
                     ask = new Ask(titleQuestion, type);
                 }
